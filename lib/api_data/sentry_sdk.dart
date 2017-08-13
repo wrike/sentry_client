@@ -1,7 +1,7 @@
 class SentrySDK {
   final String name = 'dart-sentry-client';
 
-  final String version = '4.0.2';
+  final String version = '4.0.3';
 
   const SentrySDK();
 

@@ -1,5 +1,5 @@
 [![pub](https://img.shields.io/pub/v/sentry_client.svg)](https://pub.dartlang.org/packages/sentry_client)
-[![build status](https://api.travis-ci.org/wrike/sentry_client.svg?branch=master)](https://api.travis-ci.org/wrike/sentry_client)
+[![Build Status](https://travis-ci.org/wrike/sentry_client.svg?branch=master)](https://travis-ci.org/wrike/sentry_client)
 [![codecov](https://codecov.io/gh/wrike/sentry_client/branch/master/graph/badge.svg)](https://codecov.io/gh/wrike/sentry_client)
 [![documentation](https://img.shields.io/badge/Documentation-sentry_client-blue.svg)](https://www.dartdocs.org/documentation/sentry_client/latest)
 
