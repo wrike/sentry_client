@@ -8,11 +8,11 @@ class HttpAdapterBrowser extends HttpAdapter<HttpRequest> {
   final HttpRequestFactory _httpRequestFactory;
 
   HttpAdapterBrowser({HttpRequestFactory httpRequestFactory})
-    : _httpRequestFactory = httpRequestFactory ?? new HttpRequestFactory();
+      : _httpRequestFactory = httpRequestFactory ?? new HttpRequestFactory();
 
   @override
   Future<HttpRequest> post(String url, {Map<String, dynamic> params, Map<String, String> headers, String body}) =>
-    _request('POST', url, body, params: params, headers: headers);
+      _request('POST', url, body, params: params, headers: headers);
 
   bool _isSuccessfulResponse(HttpRequest xhr) {
     var accepted = xhr.status >= 200 && xhr.status < 300;
@@ -22,16 +22,11 @@ class HttpAdapterBrowser extends HttpAdapter<HttpRequest> {
     return accepted || fileUri || notModified || unknownRedirect;
   }
 
-  Future<HttpRequest> _request(String method,
-                               String url,
-                               String data,
-                               {
-                                 Map<String, dynamic> params,
-                                 Map<String, String> headers: const <String, String>{},
-                                 String requestId,
-                                 bool withCredentials: false
-                               })
-  {
+  Future<HttpRequest> _request(String method, String url, String data,
+      {Map<String, dynamic> params,
+      Map<String, String> headers: const <String, String>{},
+      String requestId,
+      bool withCredentials: false}) {
     var completer = new Completer<HttpRequest>();
 
     if (params != null && params.isNotEmpty) {

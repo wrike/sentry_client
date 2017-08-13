@@ -6,12 +6,7 @@ import 'http_adapter.dart';
 class HttpAdapterServer implements HttpAdapter<HttpClientResponse> {
   @override
   Future<HttpClientResponse> post(String url,
-                                  {
-                                    Map<String, dynamic> params,
-                                    Map<String, String> headers,
-                                    String body
-                                  })
-  async {
+      {Map<String, dynamic> params, Map<String, String> headers, String body}) async {
     var client = new HttpClient();
 
     if (params != null && params.isNotEmpty) {

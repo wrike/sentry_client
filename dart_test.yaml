@@ -1,0 +1,4 @@
+timeout: 2x
+chain_stack_traces: false
+js_trace: true
+retry: 3

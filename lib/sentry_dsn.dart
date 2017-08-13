@@ -6,7 +6,7 @@ class SentryDsn {
   final String path;
   final String projectId;
 
-  SentryDsn(this.protocol, this.host, this.path, this.publicKey, this.projectId, {this.secretKey: null});
+  SentryDsn(this.protocol, this.host, this.path, this.publicKey, this.projectId, {this.secretKey});
 
   static SentryDsn fromString(String dsnStr, {bool allowSecretKey: false}) {
     var uri = Uri.parse(dsnStr);

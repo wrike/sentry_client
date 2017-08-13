@@ -43,9 +43,8 @@ void main() {
       when(requestMock.setRequestHeader).thenReturn((String a, String b) => requestMock.setRequestHeader(a, b));
 
       httpAdapter = new HttpAdapterBrowser(httpRequestFactory: factoryMock);
-      client = new SentryClientBrowser(
-        SentryDsn.fromString('https://123456789abcdef123456789abcdef12@sentry.local/1'), httpAdapter: httpAdapter
-      );
+      client = new SentryClientBrowser(SentryDsn.fromString('https://123456789abcdef123456789abcdef12@sentry.local/1'),
+          httpAdapter: httpAdapter);
 
       client.write(new SentryPacket());
     };
@@ -55,10 +54,8 @@ void main() {
         setUpCustom();
         selfAsync.elapse(new Duration());
 
-        expect(
-          verify(requestMock.open(captureAny, captureAny)).captured, // ignore: argument_type_not_assignable
-          ['POST', 'https://sentry.local:443/api/1/store/']
-        );
+        expect(verify(requestMock.open(captureAny, captureAny)).captured, // ignore: argument_type_not_assignable
+            ['POST', 'https://sentry.local:443/api/1/store/']);
       });
     });
 
@@ -68,9 +65,9 @@ void main() {
         selfAsync.elapse(new Duration());
 
         expect(
-          verify(requestMock.setRequestHeader(captureAny, captureAny)).captured, // ignore: argument_type_not_assignable
-          ['X-Sentry-Auth', contains('sentry_key=123456789abcdef123456789abcdef12')]
-        );
+            // ignore: argument_type_not_assignable
+            verify(requestMock.setRequestHeader(captureAny, captureAny)).captured,
+            ['X-Sentry-Auth', contains('sentry_key=123456789abcdef123456789abcdef12')]);
       });
     });
 
