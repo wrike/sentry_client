@@ -6,21 +6,14 @@
   <link rel="x-dart-test" href="browser_http_test.dart"/>
   <script src="packages/test/dart.js"></script>
   <script type="application/dart">
-    import 'browser_http_test.dart' deferred as test_lib;
-    import 'dart:html';
+    import 'browser_http_test.dart' as test_lib;
 
     void main() {
       print('RUN');
-      querySelector('.test-button-dart').onClick.listen((_) {
-        print('RUN Test');
-        test_lib.loadLibrary().then((_) {
-          test_lib.main();
-        });
-      });
+      test_lib.main();
     }
   </script>
 </head>
 <body>
-  <button class="test-button-dart">RUN</button>
 </body>
 </html>
