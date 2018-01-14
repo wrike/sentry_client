@@ -7,13 +7,14 @@ class HttpAdapterServer implements HttpAdapter<HttpClientResponse> {
   @override
   Future<HttpClientResponse> post(String url,
       {Map<String, dynamic> params, Map<String, String> headers, String body}) async {
-    var client = new HttpClient();
+    final client = new HttpClient();
+    var urlString = url;
 
     if (params != null && params.isNotEmpty) {
-      url += '?' + HttpAdapter.encodeParams(params);
+      urlString += '?' + HttpAdapter.encodeParams(params);
     }
 
-    var httpClientRequest = await client.postUrl(Uri.parse(url));
+    final httpClientRequest = await client.postUrl(Uri.parse(urlString));
 
     if (headers != null && headers.isNotEmpty) {
       headers.forEach(httpClientRequest.headers.set);

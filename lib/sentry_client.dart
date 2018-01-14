@@ -16,23 +16,24 @@ abstract class SentryClient {
       : _dsn = dsn,
         _adapter = httpAdapter,
         _maxRetries = maxRetries,
-        _url = "${dsn.protocol}://${dsn.host + dsn.path}api/${dsn.projectId}/store/";
+        _url = '${dsn.protocol}://${dsn.host + dsn.path}api/${dsn.projectId}/store/';
 
   Future<dynamic> write(SentryPacket packet) => _send(JSON.encode(packet).toString(), _maxRetries);
 
-  String _getAuthHeader() {
-    return "Sentry sentry_version=7," +
-        "sentry_timestamp=${new DateTime.now().millisecondsSinceEpoch ~/ 1000}," +
-        "sentry_key=${_dsn.publicKey}";
-  }
+  String _getAuthHeader() =>
+      // ignore: prefer_adjacent_string_concatenation
+      'Sentry sentry_version=7,' +
+      'sentry_timestamp=${new DateTime.now().millisecondsSinceEpoch ~/ 1000},' +
+      'sentry_key=${_dsn.publicKey}';
 
   Future<dynamic> _send(String body, int retriesLeft) => _adapter
           .post(_url, headers: <String, String>{'X-Sentry-Auth': _getAuthHeader()}, body: body)
           .catchError((dynamic response) {
+        var retriesLeftNext = retriesLeft;
         //TODO: Retry only on http errors
-        if (retriesLeft > 0) {
-          var wait = new Duration(milliseconds: (500 * (pow(2, _maxRetries - retriesLeft))).toInt());
-          new Timer(wait, () => _send(body, --retriesLeft));
+        if (retriesLeftNext > 0) {
+          final wait = new Duration(milliseconds: (500 * (pow(2, _maxRetries - retriesLeftNext))).toInt());
+          new Timer(wait, () => _send(body, --retriesLeftNext));
         }
 //        else {
 //          //TODO: check infinite error-cycle

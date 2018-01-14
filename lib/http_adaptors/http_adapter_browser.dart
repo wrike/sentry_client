@@ -15,10 +15,10 @@ class HttpAdapterBrowser extends HttpAdapter<HttpRequest> {
       _request('POST', url, body, params: params, headers: headers);
 
   bool _isSuccessfulResponse(HttpRequest xhr) {
-    var accepted = xhr.status >= 200 && xhr.status < 300;
-    var fileUri = xhr.status == 0; // file:// URIs have status of 0.
-    var notModified = xhr.status == 304;
-    var unknownRedirect = xhr.status > 307 && xhr.status < 400;
+    final accepted = xhr.status >= 200 && xhr.status < 300;
+    final fileUri = xhr.status == 0; // file:// URIs have status of 0.
+    final notModified = xhr.status == 304;
+    final unknownRedirect = xhr.status > 307 && xhr.status < 400;
     return accepted || fileUri || notModified || unknownRedirect;
   }
 
@@ -27,14 +27,14 @@ class HttpAdapterBrowser extends HttpAdapter<HttpRequest> {
       Map<String, String> headers: const <String, String>{},
       String requestId,
       bool withCredentials: false}) {
-    var completer = new Completer<HttpRequest>();
+    final completer = new Completer<HttpRequest>();
+    var urlString = url;
 
     if (params != null && params.isNotEmpty) {
-      url += '?' + HttpAdapter.encodeParams(params);
+      urlString += '?' + HttpAdapter.encodeParams(params);
     }
 
-    var xhr = _httpRequestFactory();
-    xhr.open(method, url);
+    final xhr = _httpRequestFactory()..open(method, urlString);
 
     if (headers != null && headers.isNotEmpty) {
       headers.forEach(xhr.setRequestHeader);

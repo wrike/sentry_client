@@ -5,7 +5,7 @@ import 'package:dart_dev/dart_dev.dart' show dev, config;
 
 /// https://github.com/Workiva/dart_dev
 Future main(List<String> args) async {
-  var dirs = ['lib/', 'tool/', 'test/'];
+  final dirs = ['lib/', 'tool/', 'test/'];
 
   config.format
     ..paths = dirs

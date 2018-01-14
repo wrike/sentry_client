@@ -1,3 +1,5 @@
+import '../src/utils.dart';
+
 /**
  * https://docs.sentry.io/clientdev/interfaces/http/
  */
@@ -55,7 +57,7 @@ class SentryRequest {
         this.headers = headers ?? {},
         this.env = env ?? {};
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => cleanNulls<String, dynamic>(<String, dynamic>{
         'url': url,
         'method': method,
         'data': data,
@@ -63,5 +65,5 @@ class SentryRequest {
         'cookies': cookies,
         'headers': headers,
         'env': env,
-      };
+      });
 }

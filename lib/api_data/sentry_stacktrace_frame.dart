@@ -1,3 +1,5 @@
+import '../src/utils.dart';
+
 class SentryStacktraceFrame {
   /**
    * The relative filepath to the call
@@ -82,7 +84,7 @@ class SentryStacktraceFrame {
   })
       : this.vars = vars ?? <String, dynamic>{};
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => cleanNulls<String, dynamic>(<String, dynamic>{
         'filename': filename,
         'function': function,
         'module': module,
@@ -95,5 +97,5 @@ class SentryStacktraceFrame {
         'in_app': inApp,
         'vars': vars,
         'package': package,
-      };
+      });
 }

@@ -1,3 +1,5 @@
+import '../src/utils.dart';
+
 /**
  * https://docs.sentry.io/clientdev/interfaces/user/
  * An interface which describes the authenticated User for a request.
@@ -28,10 +30,10 @@ class SentryUser {
 
   SentryUser({this.id, this.email, this.ipAddress, this.userName});
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => cleanNulls<String, dynamic>(<String, dynamic>{
         'id': id,
         'email': email,
         'ip_address': ipAddress,
         'user_name': userName,
-      };
+      });
 }

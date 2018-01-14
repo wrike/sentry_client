@@ -1,3 +1,4 @@
+import '../src/utils.dart';
 import 'sentry_stacktrace.dart';
 
 /**
@@ -50,12 +51,12 @@ class SentryException {
   })
       : this.stacktrace = stacktrace ?? new SentryStacktrace();
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => cleanNulls<String, dynamic>(<String, dynamic>{
         'type': type,
         'value': value,
         'module': module,
         'thread_id': threadId,
         'mechanism': mechanism,
         'stacktrace': stacktrace
-      };
+      });
 }
