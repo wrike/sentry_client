@@ -1,4 +1,3 @@
-
 Map<K, V> cleanEmpties<K, V>(Map<K, V> map) {
   final resultMap = <K, V>{};
   map.forEach((K key, V value) {
