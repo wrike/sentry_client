@@ -58,8 +58,8 @@ class SentryRequest {
         this.env = env ?? {};
 
   Map<String, dynamic> toJson() => cleanEmpties<String, dynamic>(<String, dynamic>{
-        'url': url,
-        'method': method,
+        'url': url ?? '',
+        'method': method ?? 'GET',
         'data': data,
         'query_string': queryString,
         'cookies': cookies,
