@@ -84,7 +84,7 @@ class SentryStacktraceFrame {
   })
       : this.vars = vars ?? <String, dynamic>{};
 
-  Map<String, dynamic> toJson() => cleanNulls<String, dynamic>(<String, dynamic>{
+  Map<String, dynamic> toJson() => cleanEmpties<String, dynamic>(<String, dynamic>{
         'filename': filename,
         'function': function,
         'module': module,

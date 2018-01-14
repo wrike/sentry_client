@@ -30,7 +30,7 @@ class SentryUser {
 
   SentryUser({this.id, this.email, this.ipAddress, this.userName});
 
-  Map<String, dynamic> toJson() => cleanNulls<String, dynamic>(<String, dynamic>{
+  Map<String, dynamic> toJson() => cleanEmpties<String, dynamic>(<String, dynamic>{
         'id': id,
         'email': email,
         'ip_address': ipAddress,

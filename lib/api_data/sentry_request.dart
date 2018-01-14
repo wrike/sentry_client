@@ -57,7 +57,7 @@ class SentryRequest {
         this.headers = headers ?? {},
         this.env = env ?? {};
 
-  Map<String, dynamic> toJson() => cleanNulls<String, dynamic>(<String, dynamic>{
+  Map<String, dynamic> toJson() => cleanEmpties<String, dynamic>(<String, dynamic>{
         'url': url,
         'method': method,
         'data': data,

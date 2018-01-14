@@ -156,7 +156,7 @@ class SentryPacket {
         this.request = request ?? new SentryRequest(),
         this.user = user ?? new SentryUser();
 
-  Map<String, dynamic> toJson() => cleanNulls<String, dynamic>(<String, dynamic>{
+  Map<String, dynamic> toJson() => cleanEmpties<String, dynamic>(<String, dynamic>{
         'event_id': eventId,
         'timestamp': timestamp,
         'logger': logger,
