@@ -21,9 +21,8 @@ void main() {
     StreamController<dynamic> reqOnErrorStreamController;
     StreamController<dynamic> reqOnAbortStreamController;
     HttpAdapterBrowser httpAdapter;
-    SentryClientBrowser client;
 
-    var setUpCustom = () {
+    void setUpCustom() {
       factoryMock = new HttpRequestFactoryMock();
       requestMock = new HttpRequestMock();
 
@@ -43,16 +42,15 @@ void main() {
       when(requestMock.setRequestHeader).thenReturn((String a, String b) => requestMock.setRequestHeader(a, b));
 
       httpAdapter = new HttpAdapterBrowser(httpRequestFactory: factoryMock);
-      client = new SentryClientBrowser(SentryDsn.fromString('https://123456789abcdef123456789abcdef12@sentry.local/1'),
-          httpAdapter: httpAdapter);
-
-      client.write(new SentryPacket());
-    };
+      new SentryClientBrowser(SentryDsn.fromString('https://123456789abcdef123456789abcdef12@sentry.local/1'),
+          httpAdapter: httpAdapter)
+        ..write(new SentryPacket());
+    }
 
     test('open POST request to the Setnry server', () {
       new FakeAsync().run((selfAsync) {
         setUpCustom();
-        selfAsync.elapse(new Duration());
+        selfAsync.elapse(const Duration());
 
         expect(verify(requestMock.open(captureAny, captureAny)).captured, // ignore: argument_type_not_assignable
             ['POST', 'https://sentry.local:443/api/1/store/']);
@@ -62,7 +60,7 @@ void main() {
     test('setup the Sentry auth header', () {
       new FakeAsync().run((selfAsync) {
         setUpCustom();
-        selfAsync.elapse(new Duration());
+        selfAsync.elapse(const Duration());
 
         expect(
             // ignore: argument_type_not_assignable
@@ -74,10 +72,10 @@ void main() {
     test('send serialized data', () {
       new FakeAsync().run((selfAsync) {
         setUpCustom();
-        selfAsync.elapse(new Duration());
+        selfAsync.elapse(const Duration());
 
         // ignore: argument_type_not_assignable, avoid_as
-        var capturedData = JSON.decode(verify(requestMock.send(captureAny)).captured[0]) as Map<String, dynamic>;
+        final capturedData = JSON.decode(verify(requestMock.send(captureAny)).captured[0]) as Map<String, dynamic>;
         expect(capturedData['event_id'], isNotEmpty);
         expect(capturedData['timestamp'], isNotNull);
       });
@@ -86,13 +84,26 @@ void main() {
     test('retry on a fail', () {
       new FakeAsync().run((selfAsync) {
         setUpCustom();
-        selfAsync.elapse(new Duration());
+        selfAsync.elapse(const Duration());
 
         reqOnErrorStreamController.add(new ProgressEvent('error'));
-        selfAsync.elapse(new Duration());
-        selfAsync.flushTimers();
+        selfAsync
+          ..elapse(const Duration())
+          ..flushTimers();
 
         verify(requestMock.send(any)).called(2);
+      });
+    });
+
+    test('not contain null fields', () {
+      new FakeAsync().run((selfAsync) {
+        setUpCustom();
+        selfAsync.elapse(const Duration());
+
+        // ignore: argument_type_not_assignable, avoid_as
+        final capturedData = verify(requestMock.send(captureAny)).captured[0] as String;
+
+        expect(capturedData, isNot(contains('logger')));
       });
     });
 

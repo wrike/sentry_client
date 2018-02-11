@@ -7,7 +7,7 @@ abstract class HttpAdapter<T> {
     if (queryParameters == null) {
       return '';
     }
-    var result = new StringBuffer();
+    final result = new StringBuffer();
     var first = true;
     queryParameters.forEach((String key, dynamic value) {
       if (!first) {
@@ -17,8 +17,7 @@ abstract class HttpAdapter<T> {
       result.write(Uri.encodeQueryComponent(key));
       if (value != null) {
         if (value.toString().isNotEmpty) {
-          result.write('=');
-          result.write(Uri.encodeQueryComponent(value.toString()));
+          result..write('=')..write(Uri.encodeQueryComponent(value.toString()));
         }
       }
     });

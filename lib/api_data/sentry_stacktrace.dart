@@ -1,3 +1,4 @@
+import '../src/utils.dart';
 import 'sentry_stacktrace_frame.dart';
 
 /**
@@ -29,5 +30,6 @@ class SentryStacktrace {
       : this.frames = frames ?? [],
         this.framesOmitted = framesOmitted ?? [];
 
-  Map<String, dynamic> toJson() => <String, dynamic>{'frames': frames, 'frames_omitted': framesOmitted};
+  Map<String, dynamic> toJson() =>
+      cleanEmpties<String, dynamic>(<String, dynamic>{'frames': frames, 'frames_omitted': framesOmitted});
 }

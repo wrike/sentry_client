@@ -1,5 +1,6 @@
 import 'package:uuid/uuid.dart';
 
+import '../src/utils.dart';
 import 'sentry_exception.dart';
 import 'sentry_log_level.dart';
 import 'sentry_platform.dart';
@@ -155,7 +156,7 @@ class SentryPacket {
         this.request = request ?? new SentryRequest(),
         this.user = user ?? new SentryUser();
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => cleanEmpties<String, dynamic>(<String, dynamic>{
         'event_id': eventId,
         'timestamp': timestamp,
         'logger': logger,
@@ -173,5 +174,5 @@ class SentryPacket {
         'exception': {'values': exceptionValues},
         'request': request,
         'user': user,
-      };
+      });
 }

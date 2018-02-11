@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.1.0
+- Update the linter rules & remove nulls from the request
+
 ## 4.0.4
 - Prepare for dart 2.0
 - Remove 1.21.1 checks
