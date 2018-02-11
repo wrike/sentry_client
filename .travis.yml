@@ -12,7 +12,6 @@ matrix:
     - dart: dev
       dart_task:
         test: --platform chrome
-        install_dartium: true
     - dart: stable
       script:
         - pub run dart_dev analyze
