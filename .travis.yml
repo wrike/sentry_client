@@ -11,8 +11,8 @@ matrix:
       script:
         - dartfmt --set-exit-if-changed -l 120 -n .
     - dart: dev
-      script:
-        - pub run build_runner test -- --platform firefox
+      dart_task:
+        test: --platform firefox -j 1
     - dart: dev
       script:
         - pub run build_runner test -- --platform chrome
