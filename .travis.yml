@@ -11,11 +11,11 @@ matrix:
       script:
         - dartfmt --set-exit-if-changed -l 120 -n .
     - dart: dev
-      dart_task:
-        test: --platform firefox -j 1
+      script:
+        - pub run build_runner test -- --platform firefox
     - dart: dev
-      dart_task:
-        test: --platform chrome
+      script:
+        - pub run build_runner test -- --platform chrome
     #TODO: does not work
 #    - dart: dev
 #      script:

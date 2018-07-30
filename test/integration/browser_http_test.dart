@@ -29,21 +29,19 @@ void main() {
       when(factoryMock.call()).thenReturn(requestMock);
 
       reqOnLoadStreamController = new StreamController<ProgressEvent>.broadcast();
-      when(requestMock.onLoad).thenReturn(reqOnLoadStreamController.stream);
+      when(requestMock.onLoad).thenAnswer((_) => reqOnLoadStreamController.stream);
 
       reqOnErrorStreamController = new StreamController<ProgressEvent>.broadcast();
-      when(requestMock.onError).thenReturn(reqOnErrorStreamController.stream);
+      when(requestMock.onError).thenAnswer((_) => reqOnErrorStreamController.stream);
 
       reqOnAbortStreamController = new StreamController<ProgressEvent>.broadcast();
-      when(requestMock.onAbort).thenReturn(reqOnAbortStreamController.stream);
-
-      when(requestMock.setRequestHeader(any, any)).thenReturn(null);
-      when(requestMock.setRequestHeader).thenReturn((String a, String b) => requestMock.setRequestHeader(a, b));
+      when(requestMock.onAbort).thenAnswer((_) => reqOnAbortStreamController.stream);
 
       httpAdapter = new HttpAdapterBrowser(httpRequestFactory: factoryMock);
-      new SentryClientBrowser(SentryDsn.fromString('https://123456789abcdef123456789abcdef12@sentry.local/1'),
-          httpAdapter: httpAdapter)
-        ..write(new SentryPacket());
+      new SentryClientBrowser(
+        SentryDsn.fromString('https://123456789abcdef123456789abcdef12@sentry.local/1'),
+        httpAdapter: httpAdapter,
+      )..write(new SentryPacket());
     }
 
     test('open POST request to the Setnry server', () {
