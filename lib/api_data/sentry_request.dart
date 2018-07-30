@@ -52,8 +52,7 @@ class SentryRequest {
     this.cookies,
     Map<String, String> headers,
     Map<String, String> env,
-  })
-      : this.data = data ?? {},
+  })  : this.data = data ?? {},
         this.headers = headers ?? {},
         this.env = env ?? {};
 

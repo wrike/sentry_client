@@ -144,8 +144,7 @@ class SentryPacket {
     List<SentryException> exceptionValues,
     SentryRequest request,
     SentryUser user,
-  })
-      : this.eventId = eventId ?? _uuidGenerator.v4().toString().replaceAll('-', ''),
+  })  : this.eventId = eventId ?? _uuidGenerator.v4().toString().replaceAll('-', ''),
         this.timestamp = timestamp ?? new DateTime.now().millisecondsSinceEpoch / 1000,
         this.platform = platform ?? SentryPlatform.javascript,
         this.tags = tags ?? {},

@@ -17,9 +17,9 @@ void main() {
   group('SentryClient.write should', () {
     HttpRequestFactoryMock factoryMock;
     HttpRequestMock requestMock;
-    StreamController<dynamic> reqOnLoadStreamController;
-    StreamController<dynamic> reqOnErrorStreamController;
-    StreamController<dynamic> reqOnAbortStreamController;
+    StreamController<ProgressEvent> reqOnLoadStreamController;
+    StreamController<ProgressEvent> reqOnErrorStreamController;
+    StreamController<ProgressEvent> reqOnAbortStreamController;
     HttpAdapterBrowser httpAdapter;
 
     void setUpCustom() {
@@ -28,17 +28,16 @@ void main() {
 
       when(factoryMock.call()).thenReturn(requestMock);
 
-      reqOnLoadStreamController = new StreamController<dynamic>.broadcast();
+      reqOnLoadStreamController = new StreamController<ProgressEvent>.broadcast();
       when(requestMock.onLoad).thenReturn(reqOnLoadStreamController.stream);
 
-      reqOnErrorStreamController = new StreamController<dynamic>.broadcast();
+      reqOnErrorStreamController = new StreamController<ProgressEvent>.broadcast();
       when(requestMock.onError).thenReturn(reqOnErrorStreamController.stream);
 
-      reqOnAbortStreamController = new StreamController<dynamic>.broadcast();
+      reqOnAbortStreamController = new StreamController<ProgressEvent>.broadcast();
       when(requestMock.onAbort).thenReturn(reqOnAbortStreamController.stream);
 
-      // ignore: argument_type_not_assignable
-      when(requestMock.setRequestHeader(typed(any), typed(any))).thenReturn(null);
+      when(requestMock.setRequestHeader(any, any)).thenReturn(null);
       when(requestMock.setRequestHeader).thenReturn((String a, String b) => requestMock.setRequestHeader(a, b));
 
       httpAdapter = new HttpAdapterBrowser(httpRequestFactory: factoryMock);
@@ -52,7 +51,7 @@ void main() {
         setUpCustom();
         selfAsync.elapse(const Duration());
 
-        expect(verify(requestMock.open(captureAny, captureAny)).captured, // ignore: argument_type_not_assignable
+        expect(verify(requestMock.open(captureAny, captureAny)).captured,
             ['POST', 'https://sentry.local:443/api/1/store/']);
       });
     });
@@ -62,9 +61,7 @@ void main() {
         setUpCustom();
         selfAsync.elapse(const Duration());
 
-        expect(
-            // ignore: argument_type_not_assignable
-            verify(requestMock.setRequestHeader(captureAny, captureAny)).captured,
+        expect(verify(requestMock.setRequestHeader(captureAny, captureAny)).captured,
             ['X-Sentry-Auth', contains('sentry_key=123456789abcdef123456789abcdef12')]);
       });
     });
@@ -74,8 +71,8 @@ void main() {
         setUpCustom();
         selfAsync.elapse(const Duration());
 
-        // ignore: argument_type_not_assignable, avoid_as
-        final capturedData = JSON.decode(verify(requestMock.send(captureAny)).captured[0]) as Map<String, dynamic>;
+        final capturedData =
+            json.decode(verify(requestMock.send(captureAny)).captured[0] as String) as Map<String, dynamic>;
         expect(capturedData['event_id'], isNotEmpty);
         expect(capturedData['timestamp'], isNotNull);
       });
@@ -100,7 +97,6 @@ void main() {
         setUpCustom();
         selfAsync.elapse(const Duration());
 
-        // ignore: argument_type_not_assignable, avoid_as
         final capturedData = verify(requestMock.send(captureAny)).captured[0] as String;
 
         expect(capturedData, isNot(contains('logger')));

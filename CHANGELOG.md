@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.1.1
+- Updates for Dart 2 (https://github.com/wrike/sentry_client/issues/7)
+
 ## 4.1.0
 - Update the linter rules & remove nulls from the request
 
