@@ -81,8 +81,7 @@ class SentryStacktraceFrame {
     this.inApp: true,
     Map<String, dynamic> vars,
     this.package,
-  })
-      : this.vars = vars ?? <String, dynamic>{};
+  }) : this.vars = vars ?? <String, dynamic>{};
 
   Map<String, dynamic> toJson() => cleanEmpties<String, dynamic>(<String, dynamic>{
         'filename': filename,

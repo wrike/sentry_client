@@ -26,8 +26,7 @@ class SentryStacktrace {
   SentryStacktrace({
     List<SentryStacktraceFrame> frames,
     List<int> framesOmitted,
-  })
-      : this.frames = frames ?? [],
+  })  : this.frames = frames ?? [],
         this.framesOmitted = framesOmitted ?? [];
 
   Map<String, dynamic> toJson() =>

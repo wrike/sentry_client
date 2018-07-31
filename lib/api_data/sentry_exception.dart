@@ -48,8 +48,7 @@ class SentryException {
     this.threadId,
     this.mechanism,
     SentryStacktrace stacktrace,
-  })
-      : this.stacktrace = stacktrace ?? new SentryStacktrace();
+  }) : this.stacktrace = stacktrace ?? new SentryStacktrace();
 
   Map<String, dynamic> toJson() => cleanEmpties<String, dynamic>(<String, dynamic>{
         'type': type,

@@ -18,7 +18,7 @@ abstract class SentryClient {
         _maxRetries = maxRetries,
         _url = '${dsn.protocol}://${dsn.host + dsn.path}api/${dsn.projectId}/store/';
 
-  Future<dynamic> write(SentryPacket packet) => _send(JSON.encode(packet).toString(), _maxRetries);
+  Future<dynamic> write(SentryPacket packet) => _send(json.encode(packet).toString(), _maxRetries);
 
   String _getAuthHeader() =>
       // ignore: prefer_adjacent_string_concatenation
