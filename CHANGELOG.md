@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.1
+- Fix the uuid dependence to ^1.0.0 - compatible with Dart 2
+
 ## 4.2.0
 - Updates for Dart 2 (https://github.com/wrike/sentry_client/issues/7)
 
