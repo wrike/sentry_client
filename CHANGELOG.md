@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.0
+- Fix the uuid dependence to ^2.0.0 - compatible with webdev ^2.5.0
+
 ## 4.2.1
 - Fix the uuid dependence to ^1.0.0 - compatible with Dart 2
 

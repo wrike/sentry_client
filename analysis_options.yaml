@@ -82,7 +82,7 @@ linter:
     - unnecessary_null_in_if_null_operators
     - unnecessary_overrides
     - unnecessary_statements
-    - unnecessary_this
+    #- unnecessary_this
     - unrelated_type_equality_checks
     - use_rethrow_when_possible
     - use_string_buffers
@@ -105,7 +105,7 @@ linter:
     #- prefer_interpolation_to_compose_strings
     #- avoid_function_literals_in_foreach_calls
     #- public_member_api_docs
-    - sort_constructors_first
+    #- sort_constructors_first
     #- always_specify_types
     #- avoid_annotating_with_dynamic
     #- avoid_as
