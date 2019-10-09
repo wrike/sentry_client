@@ -1,14 +1,14 @@
 name: sentry_client
-version: 4.2.1
+version: 4.3.0
 description: The Dart library for sending data to the Sentry server.
 authors:
   - Ivan Evsikov <ivan.evsikov@team.wrike.com>
 homepage: https://github.com/wrike/sentry_client
 environment:
-  sdk: '>=2.0.0-dev.36.0 <3.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
-  uuid: ^1.0.0
+  uuid: ^2.0.0
 
 dev_dependencies:
   test: ^1.3.0
